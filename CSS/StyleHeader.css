@@ -1,0 +1,35 @@
+/*----Header is the all background of my page------*/
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    max-height: 100%;
+    overflow: auto;
+    margin: 0;
+    background-color: rgb(50, 50, 50);
+    font-size: 1.5em;
+    display: block;
+}
+
+
+/*----Logo and title in the center of the page-----*/
+
+#logo {
+    text-align: center;
+    margin: 2% auto 0;
+    padding: 2%;
+}
+
+#logo img {
+    width: 5%;
+    margin-bottom: 1%;
+    display: inline;
+}
+
+#titre h1,
+h2 {
+    display: inline;
+}
+
+h1 {
+    color: #15a0ff;
+}
