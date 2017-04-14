@@ -20,7 +20,9 @@ body
     right: 0;
     opacity: 1;
     background-size: cover;
-    background: url("../Images/backgroundAccueil.jpg") no-repeat center;
+    background: url("../Images/BackgroundIndex.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
     z-index: -999;
 }
 

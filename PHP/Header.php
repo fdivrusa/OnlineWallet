@@ -21,7 +21,7 @@
 
 <body>
     <div id="Logo">
-        <img class="titre" src="../Images/Icone.png" alt="Logo du site" title="Logo du site">
+        <img class="titre" src="../Images/Logo.png" alt="Logo du site" title="Logo du site">
         <div id="titre">
             <h2>Online</h2>
             <h1>Wallet</h1>
