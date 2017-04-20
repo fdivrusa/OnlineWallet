@@ -8,7 +8,7 @@
 
 date_default_timezone_set('Europe/Brussels');
 $hote='localhost';
-$nombd='onlinewalletdb';
+$nomDB='onlinewalletdb';
 $user='OnlineWalletAdmin';
 $mdp='77I9c2OGFDYf10wO';
 

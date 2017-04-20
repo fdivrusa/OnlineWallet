@@ -8,9 +8,9 @@
  */
 
     session_start();
-    if(!isset($_SESSION['droit']))
+    if(!isset($_SESSION['userRight']))
     {
-        $_SESSION['droit']=0;
+        $_SESSION['userRight']=0;
     }
 
 ?>
