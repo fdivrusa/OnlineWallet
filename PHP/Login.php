@@ -7,45 +7,26 @@
  */
 
 include("Header.php");
+include_once("DBConnect.php");
+include_once("User.php");
 
 if (!$_SESSION['userRight'] >= 1) { //On vérifie si l'utilisateur est déja connecté
-
 
 }
 ?>
 
 <?php
 
-if (isset($_POST['Email']) && isset($_POST['Pwd'])) { //On vérifie si les champs sont remplis
+if (!empty($_POST['Email']) && !empty($_POST['Pwd'])) { //On vérifie si les champs sont remplis
 
-    try {
-        include_once("DB.php");
-        $pwd = sha1($_POST['Pwd']);
-        $droits = 1;
-        $bd = new PDO('mysql:host=' . $hote . ';dbname=' . $nomDB, $user, $mdp);
-        $req = $bd->prepare('SELECT Email, Pwd, UserRight FROM users WHERE Pwd = :Pwd AND Email = :Email'); //Vérification de l'exactitude de l'email et du mdp
-        $req->execute(array( //Execution de la requête
-            'Email' => $_POST['Email'],
-            'Pwd' => $pwd
-        ));
-        $donnees = $req->fetch();
 
-        if (!empty($donnees)) { //Si c'est ok, on enregistre les données dans les variables de sessions et on redirige vers l'accueil
+    //Connexion à la BDD
+    $dbConnect = new DBConnect();
+    $userToLog = new User($dbConnect);
 
-            $_SESSION['UserRight'] = $donnees['UserRight'];
-            $_SESSION['Email'] = $donnees['Email'];
-            header("Location: Accueil.php");
+    $userToLog->loginUser($_POST['Email'], $_POST["Pwd"]);
 
-        } else { //Sinon on met un message d'erreur
 
-            $_SESSION['UserRight'] = 0;
-            echo "Identifiants incorrect";
-        }
-
-    } catch (Exception $e) {
-
-        echo "An error has occured" . $e;
-    }
 }
 
 

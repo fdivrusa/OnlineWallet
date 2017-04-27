@@ -1,23 +1,21 @@
 <?php
-include("header.php");
 
+include("header.php");
+include_once ("DBConnect.php");
+include_once ("User.php");
+
+//Vérification du droit de l'utilisateur
 if (!$_SESSION['userRight'] >= 1) {
 
-    if (isset($_POST['Email']) && isset($_POST['UserName']) && isset($_POST['FirstName']) && isset($_POST['Pwd']) && isset($_POST['PwdVerif'])) {
-        include_once("DB.php");
+    //On vérifie que l'utilisateur a bien remplis tout les champs
+    if (!empty($_POST['Email']) && !empty($_POST['UserName']) && !empty($_POST['FirstName']) && !empty($_POST['Pwd']) && !empty($_POST['PwdVerif'])) {
 
-        try {
-            $mdp1 = sha1($_POST['Pwd']);
-            $userRight = 1; //Les droits des utilisateurs normaux est 1, je mettrais 2 pour enregistrer l'admin (moi)
-            $bd = new PDO('mysql:host=' . $hote . ';dbname=' . $nomDB, $user, $mdp);
-            $req = $bd->prepare('INSERT INTO users VALUE (:Email,:UserName,:FirstName,:Pwd,:UserRight)');
-            $req->execute(array('Email' => $_POST['Email'], 'UserName' => $_POST['UserName'], 'FirstName' => $_POST['FirstName'],'Pwd' => $mdp1, 'UserRight' => $userRight));
+        //Connexion à la BDD
+        $dbConnect = new DBConnect();
+        $newUser = new User($dbConnect);
 
-
-        } catch (Exception $e) {
-
-            echo 'An error has occured'.$e;
-        }
+        //Construction de l'objet user
+        $newUser->addUser($_POST['Email'],$_POST['UserName'], $_POST['FirstName'], $_POST['Pwd'], 1);
 
     } else {
 
