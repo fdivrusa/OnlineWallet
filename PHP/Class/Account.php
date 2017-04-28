@@ -1,12 +1,12 @@
 <?php
+
 /**
  * Created by IntelliJ IDEA.
  * User: flori
- * Date: 20-04-17
- * Time: 12:22
+ * Date: 28-04-17
+ * Time: 17:57
  */
+class Account
+{
 
-
-echo "test";
-
-?>
+}

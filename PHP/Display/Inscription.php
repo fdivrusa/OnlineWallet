@@ -1,11 +1,16 @@
 <?php
 
-include("header.php");
-include_once ("DBConnect.php");
-include_once ("User.php");
+include("Header.php");
+require_once("../Class/DBConnect.php");
+require_once("../Class/User.php");
+
+
+//On regarde si l'utilisateur n'est pas déja logué, sinon on le redirige vers sa page
+
 
 //Vérification du droit de l'utilisateur
 if (!$_SESSION['userRight'] >= 1) {
+
 
     //On vérifie que l'utilisateur a bien remplis tout les champs
     if (!empty($_POST['Email']) && !empty($_POST['UserName']) && !empty($_POST['FirstName']) && !empty($_POST['Pwd']) && !empty($_POST['PwdVerif'])) {
@@ -16,6 +21,7 @@ if (!$_SESSION['userRight'] >= 1) {
 
         //Construction de l'objet user
         $newUser->addUser($_POST['Email'],$_POST['UserName'], $_POST['FirstName'], $_POST['Pwd'], 1);
+
 
     } else {
 
@@ -32,7 +38,7 @@ if (!$_SESSION['userRight'] >= 1) {
             <meta name="author" lang="fr" content="Florian Di Vrusa">
             <meta name="generator" content="Intellij IDEA 2017.1">
             <title>Connexion</title>
-            <link rel="stylesheet" type="text/css" href="../CSS/StyleInscription.css">
+            <link rel="stylesheet" type="text/css" href="../../CSS/StyleInscription.css">
         </head>
 
         <body>
@@ -47,7 +53,7 @@ if (!$_SESSION['userRight'] >= 1) {
                 <input class="champ" type="password" name="PwdVerif" placeholder="Password verification"><br>
                 <input id="bouton" type="submit" value="Create an account" title="Create an account">
                 <div id="login">
-                    <p><a href="../PHP/Login.php">Login</a></p>
+                    <p><a href="Login.php">Login</a></p>
                 </div>
             </div>
         </form>

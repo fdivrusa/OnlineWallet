@@ -50,11 +50,10 @@ class User
      */
     public function loginUser($email, $pwd)
     {
-
         try {
 
             //Hash du mdp récupéré en paramètre (pour le passer dans la requête)
-            $pwdHasher = hash("sha256", $this->salt.$pwd);
+            $pwdHasher = hash("sha256", $this->salt . $pwd);
 
             //requête
             $req = $this->_dbConnection->prepare("SELECT * FROM users WHERE Email = :Email AND Pwd = :Pwd");
@@ -62,14 +61,17 @@ class User
             $req->bindParam(":Pwd", $pwdHasher);
             $req->execute();
 
-            $userInfo=$req->fetch(PDO::FETCH_ASSOC);
+            $userInfo = $req->fetch(PDO::FETCH_ASSOC); //Récupération des infos
 
+            if ($req->rowCount() > 0) { //Si les infos sont présentes
 
-            if ($req->rowCount() > 0) {
+                //Je les places dans mes variables de sessions
+                $_SESSION['Name'] = $userInfo['Name'];
+                $_SESSION['Email'] = $userInfo['Email'];
+                $_SESSION['FirstName'] = $userInfo['FirstName'];
+                $_SESSION['UserRight'] = $userInfo['UserRight'];
 
-                echo"Félicitations c'est du bon boulot";
-                echo $userInfo['Email'];
-
+                echo $_SESSION['Name'];
             }
 
         } catch (PDOException $e) {
@@ -83,6 +85,35 @@ class User
     public function getSalt()
     {
         return $this->salt;
+    }
+
+
+    /**
+     * @return bool : true si l'utilisateur est connecté
+     */
+    public function is_loggedin()
+    {
+        if (isset($_SESSION['Email'])) {
+            return true;
+        }
+    }
+
+    /**
+     * @param $url : Le chemin vers lequel redirigé l'utilisateur
+     */
+    public function redirection($url)
+    {
+        header("Location: $url");
+    }
+
+    public function logout()
+    {
+        //Destruction des variables de la sessions
+        $_SESSION = array();
+
+        //Destruction de la session
+        session_destroy();
+
     }
 }
             

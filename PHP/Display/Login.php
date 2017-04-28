@@ -7,8 +7,8 @@
  */
 
 include("Header.php");
-include_once("DBConnect.php");
-include_once("User.php");
+include_once("../Class/DBConnect.php");
+include_once("../Class/User.php");
 
 if (!$_SESSION['userRight'] >= 1) { //On vérifie si l'utilisateur est déja connecté
 
@@ -19,13 +19,12 @@ if (!$_SESSION['userRight'] >= 1) { //On vérifie si l'utilisateur est déja con
 
 if (!empty($_POST['Email']) && !empty($_POST['Pwd'])) { //On vérifie si les champs sont remplis
 
-
     //Connexion à la BDD
     $dbConnect = new DBConnect();
     $userToLog = new User($dbConnect);
 
+    //Log de l'utilisateur
     $userToLog->loginUser($_POST['Email'], $_POST["Pwd"]);
-
 
 }
 
@@ -44,7 +43,7 @@ if (!empty($_POST['Email']) && !empty($_POST['Pwd'])) { //On vérifie si les cha
     <meta name="author" lang="fr" content="Florian Di Vrusa">
     <meta name="generator" content="Intellij IDEA 2017.1">
     <title>Connexion</title>
-    <link rel="stylesheet" type="text/css" href="../CSS/StyleLogin.css">
+    <link rel="stylesheet" type="text/css" href="../../CSS/StyleLogin.css">
 </head>
 
 <body>
@@ -56,7 +55,7 @@ if (!empty($_POST['Email']) && !empty($_POST['Pwd'])) { //On vérifie si les cha
         <input class="champ" type="password" name="Pwd" placeholder="Password"><br>
         <input id="bouton" type="submit" value="Login" title="Login">
         <div id="creationCompte">
-            <p><a href="../PHP/Inscription.php">Create an account</a></p>
+            <p><a href="../Display/Inscription.php">Create an account</a></p>
         </div>
     </div>
 </form>

@@ -8,6 +8,7 @@
  */
 
     session_start();
+
     if(!isset($_SESSION['userRight']))
     {
         $_SESSION['userRight']=0;
@@ -16,12 +17,12 @@
 ?>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="../CSS/StyleHeader.css">
+    <link rel="stylesheet" type="text/css" href="../../CSS/StyleHeader.css">
 </head>
 
 <body>
     <div id="Logo">
-        <img class="titre" src="../Images/Logo.png" alt="Logo du site" title="Logo du site">
+        <img class="titre" src="../../Images/Logo.png" alt="Logo du site" title="Logo du site">
         <div id="titre">
             <h2>Online</h2>
             <h1>Wallet</h1>
