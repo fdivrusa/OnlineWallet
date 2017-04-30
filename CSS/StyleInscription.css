@@ -15,6 +15,16 @@ h3 {
     color: #15a0ff;
 }
 
+h5 {
+
+    background-color: firebrick;
+    color: black;
+    font-weight: bold;
+    font-size: 1em;
+    margin: 0;
+    text-align: center;
+}
+
 .champ {
     border: solid 1px grey;
     height: 4%;
@@ -22,7 +32,7 @@ h3 {
     margin-top: 5%;
 }
 
-#bouton {
+#button {
     cursor: hand;
     font-size: 0.7em;
     margin-top: 5%;
@@ -32,7 +42,7 @@ h3 {
     border: 0;
 }
 
-#bouton:hover {
+#button:hover {
     background-color: #046fc8;
 }
 

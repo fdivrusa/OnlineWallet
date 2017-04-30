@@ -30,22 +30,22 @@ class DBConnect
 
     public function connect()
     {
-
-        //Connection à la BDD
+        //Connexion à la BDD
         try {
             $this->_db = new PDO('mysql:host=' . $this->_host . ';dbname=' . $this->_nameDB . '', $this->_user, $this->_pwd);
         } catch (Exception $e) {
+
             die('Error : ' . $e->getMessage()); //Permet de ne pas continuer les instructions (alias de exit())
         }
     }
 
     //deco de la BDD
-    public function disconnect() {
-
+    public function disconnect()
+    {
         $this->_db = null;
     }
 
-    //Retourne la connection à la BDD
+    //Retourne la connexion à la BDD
     function getDBConnection()
     {
         if ($this->_db instanceof PDO) {

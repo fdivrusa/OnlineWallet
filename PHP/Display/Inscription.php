@@ -2,26 +2,55 @@
 
 include("Header.php");
 require_once("../Class/DBConnect.php");
-require_once("../Class/User.php");
+require_once("../Class/Operation.php");
 
 
 //On regarde si l'utilisateur n'est pas déja logué, sinon on le redirige vers sa page
-
-
-//Vérification du droit de l'utilisateur
 if (!$_SESSION['userRight'] >= 1) {
 
-
     //On vérifie que l'utilisateur a bien remplis tout les champs
-    if (!empty($_POST['Email']) && !empty($_POST['UserName']) && !empty($_POST['FirstName']) && !empty($_POST['Pwd']) && !empty($_POST['PwdVerif'])) {
+    if (!empty($_POST['Email']) && !empty($_POST['UserName']) && !empty($_POST['FirstName']) && !empty($_POST['Pwd']) && !empty($_POST['PwdVerif']) &&
+        isset($_POST['Email']) && isset($_POST['UserName']) && isset($_POST['FirstName']) && isset($_POST['Pwd']) && isset($_POST['PwdVerif'])
+    ) {
+
+        //Je donne les valeurs de mes champs à des variables (facilite les vérifications)
+        $userName = $_POST['UserName'];
+        $userMail = $_POST['Email'];
+        $userFirstName = $_POST['FirstName'];
+        $pwd = $_POST['Pwd'];
+        $pwdVerif = $_POST['PwdVerif'];
+        $userRight = 1;
 
         //Connexion à la BDD
         $dbConnect = new DBConnect();
-        $newUser = new User($dbConnect);
 
-        //Construction de l'objet user
-        $newUser->addUser($_POST['Email'],$_POST['UserName'], $_POST['FirstName'], $_POST['Pwd'], 1);
+        //Opération d'ajout
+        $operationAdd = new Operation($dbConnect);
 
+        //Hash du mot de passe
+        $pwdHash = hash('sha256', $operationAdd->getSalt(), $pwd);
+
+        //Vérification de l'adresse mail (Valide et pas déja dans la BDD)
+        if ($operationAdd->verifMailInscription($userMail)) {
+
+            //Vérification du mdp (assez long et correspondant) ==> MDP SENSIBLE A LA CASSE
+            if ($operationAdd->verifPassword($pwd, $pwdVerif)) {
+
+                //Ajout de l'utilisateur
+                $operationAdd->addUser($userMail, $userName, $userFirstName, $pwdHash, $userRight);
+
+            } else {
+
+                //Sinon on affiche une erreur lors de la redirection
+                $_SESSION['Error'] = "Make sure that you wrote correctly your password in the verification";
+                $operationAdd->redirect("Inscription.php");
+            }
+
+        } else {
+
+            $_SESSION['Error'] = "You have to enter a valid Email address ! Make sure that you are not already registered";
+            $operationAdd->redirect("Inscription.php");
+        }
 
     } else {
 
@@ -35,9 +64,9 @@ if (!$_SESSION['userRight'] >= 1) {
             <meta name="robots" content="index, follow">
             <meta name="geo.placename" content="Manage, Hainaut">
             <meta name="geo.region" content="BE-WHT">
-            <meta name="author" lang="fr" content="Florian Di Vrusa">
+            <meta name="author" lang="en" content="Florian Di Vrusa">
             <meta name="generator" content="Intellij IDEA 2017.1">
-            <title>Connexion</title>
+            <title>Inscription</title>
             <link rel="stylesheet" type="text/css" href="../../CSS/StyleInscription.css">
         </head>
 
@@ -46,12 +75,23 @@ if (!$_SESSION['userRight'] >= 1) {
         <form method="POST" action="Inscription.php">
             <div id="Inscription">
                 <h3>Inscription</h3>
+                <h5><?php
+                    //On regarde si il y a des erreurs que l'utilisateur à pu faire et on les effaces car elles sont affichées dans le formulaire lors de la redirection
+                    if (isset($_SESSION['Error'])) {
+                        $error = $_SESSION['Error'];
+                        echo $error;
+                        unset($_SESSION['Error']);
+                    }; ?></h5>
                 <input class="champ" type="text" name="Email" placeholder="Email" value=""><br>
-                <input class="champ" type="text" name="UserName" placeholder="Name"><br>
-                <input class="champ" type="text" name="FirstName" placeholder="Firstname"><br>
-                <input class="champ" type="password" name="Pwd" placeholder="Password"><br>
+                <input pattern="[A-Za-z]{2,}" title="Only letters" class="champ" type="text" name="UserName"
+                       placeholder="Name"><br>
+                <input pattern="[A-Za-z]{2,}" title="Only letters" class="champ" type="text" name="FirstName"
+                       placeholder="Firstname"><br>
+                <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                       title="Enter password with at least 8 characters, 1 UPPERCASE letter, 1 lowercase and 1 number"
+                       class="champ" type="password" name="Pwd" placeholder="Password"><br>
                 <input class="champ" type="password" name="PwdVerif" placeholder="Password verification"><br>
-                <input id="bouton" type="submit" value="Create an account" title="Create an account">
+                <input id="button" type="submit" value="Create an account" title="Create an account">
                 <div id="login">
                     <p><a href="Login.php">Login</a></p>
                 </div>
@@ -66,8 +106,7 @@ if (!$_SESSION['userRight'] >= 1) {
     }
 } else {
 
-    echo("vous etes logué");
-
+    header("Location: Home.php");
 }
 
 ?>

@@ -2,125 +2,114 @@
 
 /**
  * Created by IntelliJ IDEA.
- * User: Di Vrusa Florian
- * Date: 27-04-17
- * Time: 08:52
+ * User: flori
+ * Date: 29-04-17
+ * Time: 12:00
  */
 class User
 {
 
-    private $_dbConnection;
-    private $salt = "LDOKJ846LKDM6dsd";
+    private $mail;
+    private $name;
+    private $firstName;
+    private $pwd;
+    private $userRight;
 
-    function __construct()
+    public function __construct($mail, $name, $firstName, $pwd, $userRight)
     {
-        $this->_dbConnection = new DBConnect();
-        $this->_dbConnection = $this->_dbConnection->getDBConnection(); //Je récupère la connexion
+        $this->mail = $mail;
+        $this->name = $name;
+        $this->firstName = $firstName;
+        $this->pwd = $pwd;
+        $this->userRight = $userRight;
     }
 
-    //Fonction permettant d'ajouter un utilisateur dans ma BDD
-    public function addUser($email, $userName, $firstname, $pwd, $userRight)
+    //-----GETTERS-----//
+
+    /**
+     * @return mixed
+     */
+    public
+    function getMail()
     {
-        try {
-
-            //Hash du mot de passe avec grain de sel
-
-            $password = hash("sha256", $this->salt . $pwd);
-
-            //requête
-            $req = $this->_dbConnection->prepare("INSERT INTO users VALUES (:email, :name, :firstName, :pwd, :userRight)");
-
-            //Association de mes variables
-            $req->bindParam(":email", $email);
-            $req->bindParam(":name", $userName);
-            $req->bindParam(":firstName", $firstname);
-            $req->bindParam(":pwd", $password);
-            $req->bindParam(":userRight", $userRight);
-            $req->execute();
-
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
+        return $this->mail;
     }
 
     /**
-     * @param $email
-     * @param $pwd
-     * Fonction permettant de loguer un utilisateur
+     * @return mixed
      */
-    public function loginUser($email, $pwd)
+    public
+    function getName()
     {
-        try {
-
-            //Hash du mdp récupéré en paramètre (pour le passer dans la requête)
-            $pwdHasher = hash("sha256", $this->salt . $pwd);
-
-            //requête
-            $req = $this->_dbConnection->prepare("SELECT * FROM users WHERE Email = :Email AND Pwd = :Pwd");
-            $req->bindParam(":Email", $email);
-            $req->bindParam(":Pwd", $pwdHasher);
-            $req->execute();
-
-            $userInfo = $req->fetch(PDO::FETCH_ASSOC); //Récupération des infos
-
-            if ($req->rowCount() > 0) { //Si les infos sont présentes
-
-                //Je les places dans mes variables de sessions
-                $_SESSION['Name'] = $userInfo['Name'];
-                $_SESSION['Email'] = $userInfo['Email'];
-                $_SESSION['FirstName'] = $userInfo['FirstName'];
-                $_SESSION['UserRight'] = $userInfo['UserRight'];
-
-                echo $_SESSION['Name'];
-            }
-
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-        }
+        return $this->name;
     }
 
     /**
-     * @return string : le grain de sel utilisé pour le hachage
+     * @return mixed
      */
-    public function getSalt()
+    public
+    function getFirstName()
     {
-        return $this->salt;
-    }
-
-
-    /**
-     * @return bool : true si l'utilisateur est connecté
-     */
-    public function is_loggedin()
-    {
-        if (isset($_SESSION['Email'])) {
-            return true;
-        }
+        return $this->firstName;
     }
 
     /**
-     * @param $url : Le chemin vers lequel redirigé l'utilisateur
+     * @return mixed
      */
-    public function redirection($url)
+    public
+    function getPwd()
     {
-        header("Location: $url");
+        return $this->pwd;
     }
 
-    public function logout()
+    /**
+     * @return mixed
+     */
+    public
+    function getUserRight()
     {
-        //Destruction des variables de la sessions
-        $_SESSION = array();
-
-        //Destruction de la session
-        session_destroy();
-
+        return $this->userRight;
     }
+    //------------------//
+
+    //-----SETTERS------//
+
+    /**
+     * @param mixed $name
+     */
+    public
+    function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @param mixed $mail
+     */
+    public
+    function setMail($mail)
+    {
+        $this->mail = $mail;
+    }
+
+    /**
+     * @param mixed $userRight
+     */
+    public
+    function setUserRight($userRight)
+    {
+        $this->userRight = $userRight;
+    }
+
+    /**
+     * @param mixed $firstName
+     */
+    public
+    function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    //-------------//
+
 }
-            
-            
-            
-            
-            
-            
-            
-            
