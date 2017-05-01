@@ -2,11 +2,10 @@
 
 include("Header.php");
 require_once("../Class/DBConnect.php");
-require_once("../Class/Operation.php");
-
+require_once("../Class/OperationUser.php");
 
 //On regarde si l'utilisateur n'est pas déja logué, sinon on le redirige vers sa page
-if (!$_SESSION['userRight'] >= 1) {
+if (!$_SESSION['UserRight'] >= 1) {
 
     //On vérifie que l'utilisateur a bien remplis tout les champs
     if (!empty($_POST['Email']) && !empty($_POST['UserName']) && !empty($_POST['FirstName']) && !empty($_POST['Pwd']) && !empty($_POST['PwdVerif']) &&
@@ -21,23 +20,17 @@ if (!$_SESSION['userRight'] >= 1) {
         $pwdVerif = $_POST['PwdVerif'];
         $userRight = 1;
 
-        //Connexion à la BDD
-        $dbConnect = new DBConnect();
-
         //Opération d'ajout
-        $operationAdd = new Operation($dbConnect);
-
-        //Hash du mot de passe
-        $pwdHash = hash('sha256', $operationAdd->getSalt(), $pwd);
+        $operationAdd = new OperationUser($dbConnect);
 
         //Vérification de l'adresse mail (Valide et pas déja dans la BDD)
         if ($operationAdd->verifMailInscription($userMail)) {
 
             //Vérification du mdp (assez long et correspondant) ==> MDP SENSIBLE A LA CASSE
-            if ($operationAdd->verifPassword($pwd, $pwdVerif)) {
+            if ($operationAdd->verifPasswordInscription($pwd, $pwdVerif)) {
 
                 //Ajout de l'utilisateur
-                $operationAdd->addUser($userMail, $userName, $userFirstName, $pwdHash, $userRight);
+                $operationAdd->addUser($userMail, $userName, $userFirstName, $pwd, $userRight);
 
             } else {
 
@@ -83,9 +76,9 @@ if (!$_SESSION['userRight'] >= 1) {
                         unset($_SESSION['Error']);
                     }; ?></h5>
                 <input class="champ" type="text" name="Email" placeholder="Email" value=""><br>
-                <input pattern="[A-Za-z]{2,}" title="Only letters" class="champ" type="text" name="UserName"
+                <input pattern="[A-Za-z -]{2,}" title="Only valid name" class="champ" type="text" name="UserName"
                        placeholder="Name"><br>
-                <input pattern="[A-Za-z]{2,}" title="Only letters" class="champ" type="text" name="FirstName"
+                <input pattern="[A-Za-z -]{2,}" title="Only valid firstname" class="champ" type="text" name="FirstName"
                        placeholder="Firstname"><br>
                 <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                        title="Enter password with at least 8 characters, 1 UPPERCASE letter, 1 lowercase and 1 number"
@@ -106,6 +99,7 @@ if (!$_SESSION['userRight'] >= 1) {
     }
 } else {
 
+    echo 'REDIRECTION';
     header("Location: Home.php");
 }
 

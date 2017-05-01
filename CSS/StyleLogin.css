@@ -1,4 +1,3 @@
-
 /*----Login------*/
 
 #login {
@@ -14,6 +13,16 @@ h3 {
     padding-bottom: 5%;
     text-align: center;
     color: #15a0ff;
+}
+
+h5 {
+
+    background-color: firebrick;
+    color: black;
+    font-weight: bold;
+    font-size: 1em;
+    margin: 0;
+    text-align: center;
 }
 
 .champ {
@@ -36,6 +45,12 @@ h3 {
 #bouton:hover {
     background-color: #046fc8;
 
+}
+
+#passwordRecover {
+
+    font-size: 0.5em;
+    margin-left: 10%;
 }
 
 #creationCompte {

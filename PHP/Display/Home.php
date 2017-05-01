@@ -8,8 +8,18 @@
 
 require_once("../Class/User.php");
 require_once("../Class/DBConnect.php");
+require_once("../Class/OperationUser.php");
 
 session_start();
+
+//Connexion à la BDD
+$dbConnect = new DBConnect();
+$dbConnect = $dbConnect->getDBConnection();
+
+$operationUser = new OperationUser($dbConnect);
+
+//Construction d'un objet user grâce à son adresse mail
+$operationUser->constructUserFromDB($_SESSION['Email']);
 
 
 ?>
