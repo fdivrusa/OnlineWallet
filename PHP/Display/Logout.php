@@ -12,6 +12,6 @@ session_unset();
 session_destroy();
 
 //Redirection vers le login
-header("Location: Login.php");
+header("Location: Login_SignUp/Login.php");
 
 ?>

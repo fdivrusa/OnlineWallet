@@ -1,8 +1,8 @@
 <?php
 
 include("Header.php");
-require_once("../Class/DBConnect.php");
-require_once("../Class/OperationUser.php");
+require_once("../../Class/DBConnect.php");
+require_once("../../Class/OperationUser.php");
 
 //On regarde si l'utilisateur n'est pas déja logué, sinon on le redirige vers sa page
 if (!$_SESSION['UserRight'] >= 1) {
@@ -60,7 +60,7 @@ if (!$_SESSION['UserRight'] >= 1) {
             <meta name="author" lang="en" content="Florian Di Vrusa">
             <meta name="generator" content="Intellij IDEA 2017.1">
             <title>Inscription</title>
-            <link rel="stylesheet" type="text/css" href="../../CSS/StyleInscription.css">
+            <link rel="stylesheet" type="text/css" href="../../../CSS/StyleInscription.css">
         </head>
 
         <body>
@@ -100,7 +100,7 @@ if (!$_SESSION['UserRight'] >= 1) {
 } else {
 
     echo 'REDIRECTION';
-    header("Location: Home.php");
+    header("Location: ../UserHomePage/Home.php");
 }
 
 ?>

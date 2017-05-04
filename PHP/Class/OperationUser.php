@@ -59,7 +59,7 @@ class OperationUser
 
 
         //Redirection de l'utilisateur sur sa page
-        $this->redirect("../Display/Home.php");
+        $this->redirect("../UserHomePage/Home.php");
     }
 
     /**
@@ -94,7 +94,7 @@ class OperationUser
             echo $e->getMessage();
         }
 
-        $this->redirect("../Display/Home.php");
+        $this->redirect("../UserHomePage/Home.php");
     }
 
     //----Vérifications des paramètres----//
@@ -210,10 +210,9 @@ class OperationUser
 
             return false;
         }
-
     }
 
-    public function constructUserFromDB($email)
+    public function getUserInfo($email)
     {
 
         //Connexion à la BDD
@@ -225,14 +224,7 @@ class OperationUser
         $req->execute();
         $data = $req->fetch();
 
-        //Construction d'un objet utilisateur
-        $user = new User($data['Email'], $data['Name'], $data['FirstName'], $data['Pwd'], $data['UserRight']);
-
-        $_SESSION['Email'] = $data['Email'];
-        $_SESSION['Name'] = $data['Name'];
-        $_SESSION['FirstName'] = $data["FirstName"];
-        $_SESSION['UserRight'] = $data['UserRight'];
-
+        return $data;
     }
 
     /**

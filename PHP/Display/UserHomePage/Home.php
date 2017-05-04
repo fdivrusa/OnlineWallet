@@ -6,20 +6,9 @@
  * Time: 12:22
  */
 
-require_once("../Class/User.php");
-require_once("../Class/DBConnect.php");
-require_once("../Class/OperationUser.php");
+include_once ("Header.php");
 
-session_start();
 
-//Connexion à la BDD
-$dbConnect = new DBConnect();
-$dbConnect = $dbConnect->getDBConnection();
-
-$operationUser = new OperationUser($dbConnect);
-
-//Construction d'un objet user grâce à son adresse mail
-$operationUser->constructUserFromDB($_SESSION['Email']);
 
 
 ?>
@@ -36,14 +25,14 @@ $operationUser->constructUserFromDB($_SESSION['Email']);
     <meta name="author" lang="fr" content="Florian Di Vrusa">
     <meta name="generator" content="Intellij IDEA 2017.1">
     <title>Connexion</title>
-    <link rel="stylesheet" type="text/css" href="../../CSS/StyleHome.css">
+    <link rel="stylesheet" type="text/css" href="../../../CSS/StyleHome.css">
 </head>
 
 <body>
 <div>
     <h5></h5>
 </div>
-<a href="Logout.php">Logout</a>
+<a href="../Logout.php">Logout</a>
 </body>
 </html>
 

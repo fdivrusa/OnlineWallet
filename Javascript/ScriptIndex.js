@@ -5,7 +5,7 @@
 $(document).ready(apparition);
 
 function apparition() {
-    $('.phraseAccueil').animate(
+    $('.welcomePhrase').animate(
         {
             opacity: 1,
             padding: 0
@@ -17,7 +17,7 @@ function apparition() {
             opacity: 0.6
         }, {duration: 1500});
 
-    $('#bouton').animate(
+    $('#discoverButton').animate(
         {
             opacity: 1
         }, {duration: 1000});

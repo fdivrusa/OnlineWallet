@@ -7,8 +7,8 @@
  */
 
 include("Header.php");
-require_once("../Class/DBConnect.php");
-require_once("../Class/OperationUser.php");
+require_once("../../Class/DBConnect.php");
+require_once("../../Class/OperationUser.php");
 
 //Si l'utilisateur est déja logué, on le redirige vers sa page
 if (!$_SESSION['UserRight'] >= 1) {
@@ -55,7 +55,7 @@ if (!$_SESSION['UserRight'] >= 1) {
             <meta name="author" lang="en" content="Florian Di Vrusa">
             <meta name="generator" content="Intellij IDEA 2017.1">
             <title>Login</title>
-            <link rel="stylesheet" type="text/css" href="../../CSS/StyleLogin.css">
+            <link rel="stylesheet" type="text/css" href="../../../CSS/StyleLogin.css">
         </head>
 
         <body>
@@ -75,7 +75,7 @@ if (!$_SESSION['UserRight'] >= 1) {
                 <input id="bouton" type="submit" value="Login" title="Login">
                 <a id="passwordRecover" href="">Forgot password ?</a>
                 <div id="creationCompte">
-                    <p><a href="../Display/Inscription.php"> Create an account </a></p>
+                    <p><a href="Inscription.php"> Create an account </a></p>
                 </div>
             </div>
         </form>
@@ -87,7 +87,7 @@ if (!$_SESSION['UserRight'] >= 1) {
     }
 } else {
 
-    header("Location: Home.php");
+    header("Location: ../Home.php");
 }
 
 ?>
