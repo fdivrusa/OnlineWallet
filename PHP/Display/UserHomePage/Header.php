@@ -12,6 +12,7 @@ require_once("../../Class/OperationUser.php");
 
 session_start();
 
+
 if(!isset($_SESSION['Email'])) {
 
     //Si l'utilisateur essaye d'accéder à sa page sans se connecter, on le redirige vers le login
@@ -29,8 +30,6 @@ if(!isset($_SESSION['Email'])) {
 
     //Construction d'un objet utilisateur
     $user = new User($data['Email'], $data['Name'], $data['FirstName'], $data['Pwd'], $data['UserRight']);
-
-
 }
 
 ?>
@@ -40,10 +39,23 @@ if(!isset($_SESSION['Email'])) {
 </head>
 
 <body>
+<div id ="background">
+    <img src="../../../Images/BackgroundIndex.jpg" alt="">
+</div>
+
     <header>
         <div id="userInfo">
-            <h3></h3>
-            <h4></h4>
+            <h2><?php echo $user->getName(); ?></h2>
+            <h3><?php echo $user->getFirstName(); ?></h3>
         </div>
+        <div id="options">
+            <h2><a id="logout" href="../Logout.php">Logout</a></h2>
+            <h2><a href="../Modify.php">Account modification</a></h2>
+        </div>
+        <div id="title">
+            <h1>My Wallet</h1>
+        </div>
+
     </header>
+
 </body>

@@ -49,6 +49,7 @@ class OperationUser
 
             //Ajout des infos dans mes variables de session
             $_SESSION['Email'] = $mail;
+            $_SESSION['UserRight'] = $userRight;
 
         } catch (PDOException $e) {
 
@@ -85,8 +86,9 @@ class OperationUser
             $userInfo = $req->fetch();
             if ($req->rowCount() > 0) { //Si les infos sont présentes
 
-                //Je place mon email dans ma variable de session
+                //Je place l'email et le droit dans mes variable de session
                 $_SESSION['Email'] = $userInfo['Email'];
+                $_SESSION['UserRight'] = $userInfo['UserRight'];
 
             }
 

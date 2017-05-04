@@ -87,7 +87,7 @@ if (!$_SESSION['UserRight'] >= 1) {
     }
 } else {
 
-    header("Location: ../Home.php");
+    header("Location: ../UserHomePage/Home.php");
 }
 
 ?>

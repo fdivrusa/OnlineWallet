@@ -1,0 +1,48 @@
+body {
+
+    margin: 0;
+    background-color: black;
+}
+
+#background img{
+
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.5;
+
+}
+
+header {
+
+    height: 160px;
+    background-color: #046fc8;
+    box-shadow:  black 0px 5px 10px;
+    z-index: 1;
+}
+
+#userInfo {
+
+    float: left;
+    color: white;
+    margin-left: 2%;
+    font-size: 1.5em;
+}
+
+#title {
+
+    display: table;
+    margin: 0 auto;
+    font-size: 2em;
+    padding-top: 2%;
+}
+
+#options {
+
+    text-align: center;
+    float: right;
+    margin-right: 2%;
+    margin-top: 1%;
+
+}

@@ -24,7 +24,7 @@ include_once ("Header.php");
     <meta name="geo.region" content="BE-WHT">
     <meta name="author" lang="fr" content="Florian Di Vrusa">
     <meta name="generator" content="Intellij IDEA 2017.1">
-    <title>Connexion</title>
+    <title>Home</title>
     <link rel="stylesheet" type="text/css" href="../../../CSS/StyleHome.css">
 </head>
 
@@ -32,7 +32,6 @@ include_once ("Header.php");
 <div>
     <h5></h5>
 </div>
-<a href="../Logout.php">Logout</a>
 </body>
 </html>
 
