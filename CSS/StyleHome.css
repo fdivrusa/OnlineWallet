@@ -33,7 +33,7 @@ header {
 #title {
 
     display: table;
-    margin: 0 auto;
+    margin-left: 42.5%;
     font-size: 2em;
     padding-top: 2%;
 }
@@ -43,6 +43,6 @@ header {
     text-align: center;
     float: right;
     margin-right: 2%;
-    margin-top: 1%;
 
 }
+

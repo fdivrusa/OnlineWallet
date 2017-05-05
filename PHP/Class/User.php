@@ -81,6 +81,7 @@ class User
     function setName($name)
     {
         $this->name = $name;
+        $_SESSION["Name"] = $name;
     }
 
     /**
@@ -90,6 +91,7 @@ class User
     function setMail($mail)
     {
         $this->mail = $mail;
+        $_SESSION['Email'] = $mail;
     }
 
     /**
@@ -99,6 +101,7 @@ class User
     function setUserRight($userRight)
     {
         $this->userRight = $userRight;
+        $_SESSION["UserRight"] = $userRight;
     }
 
     /**
@@ -108,6 +111,15 @@ class User
     function setFirstName($firstName)
     {
         $this->firstName = $firstName;
+        $_SESSION["FirstName"] = $firstName;
+    }
+
+    /**
+     * @param mixed $pwd
+     */
+    public function setPwd($pwd)
+    {
+        $this->pwd = $pwd;
     }
 
     //-------------//

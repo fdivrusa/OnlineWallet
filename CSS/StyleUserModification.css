@@ -1,0 +1,26 @@
+#modification {
+
+    width: 20%;
+    background-color: white;
+    margin: 0 auto;
+    margin-top: 5%;
+    padding: 0 2% 2% 2%;
+
+}
+
+h4 {
+
+    font-size: 2em;
+    margin: 0;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    text-align: center;
+}
+
+.field {
+
+    border: solid 1px grey;
+    height: 4%;
+    width: 100%;
+    margin: 3% auto;
+}

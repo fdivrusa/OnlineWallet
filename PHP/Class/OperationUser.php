@@ -60,7 +60,7 @@ class OperationUser
 
 
         //Redirection de l'utilisateur sur sa page
-        $this->redirect("../UserHomePage/Home.php");
+        $this->redirect("../UserPage/Home.php");
     }
 
     /**
@@ -96,7 +96,7 @@ class OperationUser
             echo $e->getMessage();
         }
 
-        $this->redirect("../UserHomePage/Home.php");
+        $this->redirect("../UserPages/Home.php");
     }
 
     //----Vérifications des paramètres----//

@@ -70,11 +70,13 @@ if (!$_SESSION['UserRight'] >= 1) {
                         echo $error;
                         unset($_SESSION['Error']);
                     }; ?></h5>
-                <input class="champ" type="text" name="Email" placeholder="Email"><br>
-                <input class="champ" type="password" name="Pwd" placeholder="Password"><br>
+                <input class="field" type="text" name="Email" placeholder="Email"><br>
+                <input class="field" type="password" name="Pwd" placeholder="Password"><br>
                 <input id="bouton" type="submit" value="Login" title="Login">
+
                 <a id="passwordRecover" href="">Forgot password ?</a>
-                <div id="creationCompte">
+
+                <div id="accountCreation">
                     <p><a href="Inscription.php"> Create an account </a></p>
                 </div>
             </div>
@@ -87,7 +89,7 @@ if (!$_SESSION['UserRight'] >= 1) {
     }
 } else {
 
-    header("Location: ../UserHomePage/Home.php");
+    header("Location: ../UserPages/Home.php");
 }
 
 ?>

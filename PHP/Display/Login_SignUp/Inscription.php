@@ -66,8 +66,11 @@ if (!$_SESSION['UserRight'] >= 1) {
         <body>
 
         <form method="POST" action="Inscription.php">
+
             <div id="Inscription">
+
                 <h3>Inscription</h3>
+
                 <h5><?php
                     //On regarde si il y a des erreurs que l'utilisateur à pu faire et on les effaces car elles sont affichées dans le formulaire lors de la redirection
                     if (isset($_SESSION['Error'])) {
@@ -75,20 +78,31 @@ if (!$_SESSION['UserRight'] >= 1) {
                         echo $error;
                         unset($_SESSION['Error']);
                     }; ?></h5>
+
                 <input class="champ" type="text" name="Email" placeholder="Email" value=""><br>
+
                 <input pattern="[A-Za-z -]{2,}" title="Only valid name" class="champ" type="text" name="UserName"
                        placeholder="Name"><br>
+
                 <input pattern="[A-Za-z -]{2,}" title="Only valid firstname" class="champ" type="text" name="FirstName"
                        placeholder="Firstname"><br>
+
                 <input pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                        title="Enter password with at least 8 characters, 1 UPPERCASE letter, 1 lowercase and 1 number"
                        class="champ" type="password" name="Pwd" placeholder="Password"><br>
+
                 <input class="champ" type="password" name="PwdVerif" placeholder="Password verification"><br>
+
                 <input id="button" type="submit" value="Create an account" title="Create an account">
+
                 <div id="login">
+
                     <p><a href="Login.php">Login</a></p>
+
                 </div>
+
             </div>
+
         </form>
 
         </body>
@@ -100,7 +114,7 @@ if (!$_SESSION['UserRight'] >= 1) {
 } else {
 
     echo 'REDIRECTION';
-    header("Location: ../UserHomePage/Home.php");
+    header("Location: ../UserPages/Home.php");
 }
 
 ?>

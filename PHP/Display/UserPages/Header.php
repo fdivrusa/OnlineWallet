@@ -13,10 +13,11 @@ require_once("../../Class/OperationUser.php");
 session_start();
 
 
-if(!isset($_SESSION['Email'])) {
+if (!isset($_SESSION['Email'])) {
 
     //Si l'utilisateur essaye d'accéder à sa page sans se connecter, on le redirige vers le login
     header("Location: ../Login_SignUp/Login.php");
+
 } else {
 
     //Connexion à la BDD
@@ -30,6 +31,13 @@ if(!isset($_SESSION['Email'])) {
 
     //Construction d'un objet utilisateur
     $user = new User($data['Email'], $data['Name'], $data['FirstName'], $data['Pwd'], $data['UserRight']);
+
+    //Variables de sessions
+    $_SESSION["Name"] = $user->getName();
+    $_SESSION["FirstName"] = $user->getFirstName();
+    $_SESSION["Email"] = $user->getMail();
+    $_SESSION["Pwd"] = $user->getPwd();
+    $_SESSION["UserRight"] = $user->getUserRight();
 }
 
 ?>
@@ -39,23 +47,24 @@ if(!isset($_SESSION['Email'])) {
 </head>
 
 <body>
-<div id ="background">
+<div id="background">
     <img src="../../../Images/BackgroundIndex.jpg" alt="">
 </div>
 
-    <header>
-        <div id="userInfo">
-            <h2><?php echo $user->getName(); ?></h2>
-            <h3><?php echo $user->getFirstName(); ?></h3>
-        </div>
-        <div id="options">
-            <h2><a id="logout" href="../Logout.php">Logout</a></h2>
-            <h2><a href="../Modify.php">Account modification</a></h2>
-        </div>
-        <div id="title">
-            <h1>My Wallet</h1>
-        </div>
+<header>
+    <div id="userInfo">
+        <h2><?php echo $user->getName(); ?></h2>
+        <h3><?php echo $user->getFirstName(); ?></h3>
+    </div>
+    <div id="options">
+        <h2><a href="Home.php">Home</a></h2>
+        <h2><a id="logout" href="../Logout.php">Logout</a></h2>
+        <h2><a href="UserModification.php">Account modification</a></h2>
+    </div>
+    <div id="title">
+        <h1>My Wallet</h1>
+    </div>
 
-    </header>
+</header>
 
 </body>

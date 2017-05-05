@@ -25,7 +25,7 @@ h5 {
     text-align: center;
 }
 
-.champ {
+.field {
     border: solid 1px grey;
     height: 4%;
     width: 100%;
@@ -53,7 +53,7 @@ h5 {
     margin-left: 10%;
 }
 
-#creationCompte {
+#accountCreation {
 
     margin-bottom: -35%;
     margin-left: -25%;
