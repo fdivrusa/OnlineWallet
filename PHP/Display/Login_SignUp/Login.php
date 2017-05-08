@@ -18,6 +18,8 @@ if (!$_SESSION['UserRight'] >= 1) {
         $email = $_POST['Email'];
         $pwd = $_POST['Pwd'];
 
+        $dbConnect = new DBConnect();
+
         //Operation de Log
         $operationLog = new OperationUser($dbConnect);
 
@@ -35,7 +37,9 @@ if (!$_SESSION['UserRight'] >= 1) {
                 $_SESSION['Error'] = "Make sure that your password is correct";
                 $operationLog->redirect("Login.php");
             }
+
         } else {
+
             $_SESSION['Error'] = "Make sure that the Email is valid or already registered";
             $operationLog->redirect("Login.php");
         }

@@ -60,7 +60,7 @@ class OperationUser
 
 
         //Redirection de l'utilisateur sur sa page
-        $this->redirect("../UserPage/Home.php");
+        $this->redirect("../UserPages/Home.php");
     }
 
     /**
@@ -99,37 +99,54 @@ class OperationUser
         $this->redirect("../UserPages/Home.php");
     }
 
+    //Modifie les valeurs de l'utilisateurs dans la BDD
+    public function modifyUser($oldEmail,$newEmail, $newName, $newFirstName)
+    {
+        $req = $this->dbConnect->prepare("UPDATE users SET Email = :newEmail, Name = :name, FirstName = :firstName WHERE  Email = :oldEmail");
+        $req->bindParam(":newEmail", $newEmail);
+        $req->bindParam(":name", $newName);
+        $req->bindParam(":firstName", $newFirstName);
+        $req->bindParam(":oldEmail", $oldEmail);
+        $req->execute();
+
+        //Je met à jour la variable de session
+        $_SESSION['Email'] = $newEmail;
+
+        header("Location: ../UserPages/Home.php");
+    }
+
     //----Vérifications des paramètres----//
 
     /**
      * @param $email
      * @return bool
      */
-    public function verifMailInscription($email)
+    public function verifMailNotInDB($email)
     {
         //Connexion à ma BDD
         $dbConnect = new DBConnect();
         $dbConnect = $dbConnect->getDBConnection();
 
         //Je récupère tout en minuscule et sans espaces
-        $email = strtolower(trim($email));
+        $email = strtolower($email);
 
         //Requête de recherche dans la BDD
         $req = $dbConnect->prepare("SELECT * FROM users WHERE Email = :email");
         $req->bindParam(":email", $email);
         $req->execute();
-        $data = $req->fetch();
 
         //Je vérifie avec la fonction si l'adresse est valide
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
             //Si elle est valide, je regarde que l'adresse n'est pas déja dans la DB
-            if ($data['Email'] == $email) {
+            if ($req->rowCount() == 0) {
+
+                return true;
+
+            } else {
 
                 return false;
             }
-
-            return true;
 
         } else {
 

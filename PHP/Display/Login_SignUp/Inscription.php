@@ -20,11 +20,13 @@ if (!$_SESSION['UserRight'] >= 1) {
         $pwdVerif = $_POST['PwdVerif'];
         $userRight = 1;
 
+        $dbConnect = new DBConnect();
+
         //Opération d'ajout
         $operationAdd = new OperationUser($dbConnect);
 
         //Vérification de l'adresse mail (Valide et pas déja dans la BDD)
-        if ($operationAdd->verifMailInscription($userMail)) {
+        if ($operationAdd->verifMailNotInDB($userMail)) {
 
             //Vérification du mdp (assez long et correspondant) ==> MDP SENSIBLE A LA CASSE
             if ($operationAdd->verifPasswordInscription($pwd, $pwdVerif)) {
