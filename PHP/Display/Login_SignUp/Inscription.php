@@ -50,6 +50,7 @@ if (!$_SESSION['UserRight'] >= 1) {
     } else {
 
         ?>
+
         <html>
         <head>
             <meta charset="UTF-8">
@@ -109,7 +110,6 @@ if (!$_SESSION['UserRight'] >= 1) {
 
         </body>
         </html>
-
 
         <?php
     }

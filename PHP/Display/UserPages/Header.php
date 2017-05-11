@@ -57,7 +57,7 @@ if (!isset($_SESSION['Email'])) {
         <h3><?php echo $user->getFirstName(); ?></h3>
     </div>
     <div id="options">
-        <h2><a href="Home.php">Home</a></h2>
+        <h2><a href="../UserPages/Home.php">Home</a></h2>
         <h2><a id="logout" href="../Logout.php">Logout</a></h2>
         <h2><a href="UserModification.php">Account modification</a></h2>
     </div>

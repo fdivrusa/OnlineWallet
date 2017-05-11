@@ -46,3 +46,36 @@ header {
 
 }
 
+p {
+
+    margin: 0;
+    padding: 1% 0 1% 0;
+}
+
+#users {
+
+    display: block;
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 5%;
+
+}
+
+#display {
+
+    background-color: ghostwhite;
+    text-align: center;
+}
+
+#info {
+
+    padding: 5%;
+}
+
+.button {
+
+    width: 40%;
+    display: block;
+    margin: 0 auto;
+}
+

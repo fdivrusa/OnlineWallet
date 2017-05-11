@@ -100,7 +100,7 @@ class OperationUser
     }
 
     //Modifie les valeurs de l'utilisateurs dans la BDD
-    public function modifyUser($oldEmail,$newEmail, $newName, $newFirstName)
+    public function modifyUser($oldEmail, $newEmail, $newName, $newFirstName)
     {
         $req = $this->dbConnect->prepare("UPDATE users SET Email = :newEmail, Name = :name, FirstName = :firstName WHERE  Email = :oldEmail");
         $req->bindParam(":newEmail", $newEmail);
@@ -108,9 +108,6 @@ class OperationUser
         $req->bindParam(":firstName", $newFirstName);
         $req->bindParam(":oldEmail", $oldEmail);
         $req->execute();
-
-        //Je met à jour la variable de session
-        $_SESSION['Email'] = $newEmail;
 
         header("Location: ../UserPages/Home.php");
     }
@@ -208,9 +205,6 @@ class OperationUser
         //Hash du mdp
         $pwdHash = hash("sha512", $this->salt . $pwd);
 
-        //Je dois récupérer en string sinon ça bug dans la BDD
-        $pwdHash = $pwdHash;
-
         //Connexion à la BDD
         $dbConnect = new DBConnect();
         $dbConnect = $dbConnect->getDBConnection();
@@ -228,6 +222,32 @@ class OperationUser
         } else {
 
             return false;
+        }
+    }
+
+    public function passwordModif($oldPwd, $newPwd)
+    {
+        //Si le mot de passe se trouve dans la DB, on continue
+        if ($this->verifPasswordLogin($_SESSION['Email'], $oldPwd)) {
+
+            //Connexion à la BD
+            $dbConnect = new DBConnect();
+            $dbConnect = $dbConnect->getDBConnection();
+
+            //Hash du nouveau mdp
+            $newPwdHash = hash("sha512", $this->salt . $newPwd);
+
+            //Modification dans la DB du mot de passe
+            $req = $dbConnect->prepare("UPDATE users SET Pwd = :pwd WHERE :email = Email");
+            $req->bindParam(":pwd", $newPwdHash);
+            $req->bindParam(":email", $_SESSION['Email']);
+            $req->execute();
+
+            header("Location: ../UserPages/Home.php");
+
+        } else {
+
+            $_SESSION['Error'] = "Make sure that your actual password is correct !";
         }
     }
 

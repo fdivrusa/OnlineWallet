@@ -5,6 +5,7 @@
     margin: 0 auto;
     margin-top: 5%;
     padding: 0 2% 2% 2%;
+    box-shadow: 10px 10px 5px black;
 
 }
 
@@ -19,7 +20,7 @@ h4 {
 
 h5 {
 
-    background-color: firebrick;
+    background-color: red;
     color: black;
     font-weight: bold;
     font-size: 1em;
@@ -33,4 +34,67 @@ h5 {
     height: 4%;
     width: 100%;
     margin: 3% auto;
+}
+
+#delButton {
+
+    width: 20%;
+    margin: 0 auto;
+    margin-top: 3%;
+}
+
+h2 {
+
+    text-align: center;
+}
+
+#delButton a {
+
+    text-decoration: none;
+    color: black;
+    padding: 5%;
+    background-color: red;
+    border-radius: 30%;
+    box-shadow: 10px 10px 5px black;
+}
+
+#delButton a:hover {
+
+    box-shadow: 15px 15px 10px black;
+}
+
+#button {
+
+    background-color: #046fc8;
+    display: block;
+    padding: 5%;
+    margin: 5% auto;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+#buttonModif {
+
+    background-color: #046fc8;
+    display: block;
+    padding: 2% 8% 2% 8%;
+    margin: 5% auto;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+#buttonModifPwd {
+
+    background-color: #046fc8;
+    display: block;
+    padding: 5%;
+    margin: 5% auto;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+#buttonModifPwd a {
+
+    text-decoration: none;
+    color: black;
 }

@@ -17,7 +17,7 @@ $operationMod = new OperationUser($dbConnect);
 if ($_SESSION['UserRight'] >= 1) {
 
 
-    //On vérifie si les informations sont correctes
+    //On vérifie si les informations sont bien présentes
     if (isset($_POST['Email']) && isset($_POST['Name']) && isset($_POST['FirstName']) &&
         !empty($_POST['FirstName']) && !empty($_POST['Name']) && !empty($_POST['Email'])) {
 
@@ -29,6 +29,7 @@ if ($_SESSION['UserRight'] >= 1) {
 
                 //On peut modifier les infos dans la BDD
                 $operationMod->modifyUser($_SESSION['Email'], $_POST['Email'], $_POST['Name'], $_POST['FirstName']);
+                $_SESSION["Email"] = $_POST['Email'];
 
             } else {
 
@@ -73,11 +74,16 @@ if ($_SESSION['UserRight'] >= 1) {
             <input class="field" pattern="[A-Za-z -]{2,}" title="Only valid firstname" type="text" name="FirstName"
                    placeholder="Firstname" value="<?php echo $userToModify->getFirstName(); ?>"><br>
 
-            <input type="submit" value="Modify" title="Modify">
-            <button type="submit"><a href="PasswordModification.php">Modify Password</a></button>
+            <input id="buttonModif" type="submit" value="Modify" title="Modify">
+            <button id="buttonModifPwd" type="submit"><a href="PasswordModification.php">Modify Password</a></button>
 
         </div>
     </form>
+
+    <div id="delButton">
+        <h2><a href="DeleteVerif.php">Delete Account</a></h2>
+    </div>
+
     </body>
     </html>
 
