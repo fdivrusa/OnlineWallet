@@ -100,16 +100,16 @@ class OperationUser
     }
 
     //Modifie les valeurs de l'utilisateurs dans la BDD
-    public function modifyUser($oldEmail, $newEmail, $newName, $newFirstName)
+    public function modifyUser($oldEmail, $newEmail, $newName, $newFirstName, $newUserRight)
     {
-        $req = $this->dbConnect->prepare("UPDATE users SET Email = :newEmail, Name = :name, FirstName = :firstName WHERE  Email = :oldEmail");
+        $req = $this->dbConnect->prepare("UPDATE users SET Email = :newEmail, Name = :name, FirstName = :firstName, UserRight = :userRight WHERE  Email = :oldEmail");
         $req->bindParam(":newEmail", $newEmail);
         $req->bindParam(":name", $newName);
         $req->bindParam(":firstName", $newFirstName);
         $req->bindParam(":oldEmail", $oldEmail);
+        $req->bindParam(":userRight", $newUserRight);
         $req->execute();
 
-        header("Location: ../UserPages/Home.php");
     }
 
     //----Vérifications des paramètres----//

@@ -72,10 +72,18 @@ p {
     padding: 5%;
 }
 
+input {
+
+    width: 75%;
+    margin: 2%;
+    padding: 2%;
+}
+
 .button {
 
     width: 40%;
     display: block;
-    margin: 0 auto;
+    margin: 2% auto;
+    padding: 2%;
 }
 

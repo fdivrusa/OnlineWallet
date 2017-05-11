@@ -28,8 +28,10 @@ if ($_SESSION['UserRight'] >= 1) {
             if (($operationMod->verifMailNotInDB($_POST['Email'])) == true) {
 
                 //On peut modifier les infos dans la BDD
-                $operationMod->modifyUser($_SESSION['Email'], $_POST['Email'], $_POST['Name'], $_POST['FirstName']);
+                $operationMod->modifyUser($_SESSION['Email'], $_POST['Email'], $_POST['Name'], $_POST['FirstName'], $_SESSION['UserRight']);
                 $_SESSION["Email"] = $_POST['Email'];
+                header("Location: Home.php");
+
 
             } else {
 
@@ -39,7 +41,8 @@ if ($_SESSION['UserRight'] >= 1) {
         } else {
 
             //On modifie quand même, même si il ne change pas son mail
-            $operationMod->modifyUser($_SESSION['Email'], $_POST['Email'], $_POST['Name'], $_POST['FirstName']);
+            $operationMod->modifyUser($_SESSION['Email'], $_POST['Email'], $_POST['Name'], $_POST['FirstName'], $_SESSION['UserRight']);
+            header("Location: Home.php");
         }
     }
 
