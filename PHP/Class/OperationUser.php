@@ -40,6 +40,7 @@ class OperationUser
             $req = $this->dbConnect->prepare("INSERT INTO users VALUES (:email, :name, :firstName, :pwd, :userRight)");
 
             //Association de mes variables
+            //J'utilises BindParam pour avoir une vue d'ensemble et que ça soit plus propre
             $req->bindParam(":email", $mail);
             $req->bindParam(":name", $name);
             $req->bindParam(":firstName", $firstname);
@@ -55,9 +56,6 @@ class OperationUser
 
             echo $e;
         }
-
-        //Fermeture de la connexion
-
 
         //Redirection de l'utilisateur sur sa page
         $this->redirect("../UserPages/Home.php");
@@ -109,7 +107,6 @@ class OperationUser
         $req->bindParam(":oldEmail", $oldEmail);
         $req->bindParam(":userRight", $newUserRight);
         $req->execute();
-
     }
 
     //----Vérifications des paramètres----//

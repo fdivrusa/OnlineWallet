@@ -115,7 +115,6 @@ if (!$_SESSION['UserRight'] >= 1) {
     }
 } else {
 
-    echo 'REDIRECTION';
     header("Location: ../UserPages/Home.php");
 }
 

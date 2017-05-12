@@ -23,11 +23,6 @@ class DBConnect
         $this->connect();
     }
 
-    public function __destruct()
-    {
-        $this->disconnect();
-    }
-
     public function connect()
     {
         //Connexion à la BDD
@@ -37,12 +32,6 @@ class DBConnect
 
             die('Error : ' . $e->getMessage()); //Permet de ne pas continuer les instructions (alias de exit())
         }
-    }
-
-    //deco de la BDD
-    public function disconnect()
-    {
-        $this->_db = null;
     }
 
     //Retourne la connexion à la BDD

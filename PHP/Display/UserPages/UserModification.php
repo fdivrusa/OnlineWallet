@@ -84,7 +84,7 @@ if ($_SESSION['UserRight'] >= 1) {
     </form>
 
     <div id="delButton">
-        <h2><a href="DeleteVerif.php">Delete Account</a></h2>
+        <h2><a href="">Delete Account</a></h2>
     </div>
 
     </body>
