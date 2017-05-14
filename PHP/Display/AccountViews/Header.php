@@ -7,38 +7,52 @@
  */
 
 require_once("../../Class/User.php");
+require_once("../../Class/Account.php");
 require_once("../../Class/DBConnect.php");
 require_once("../../Class/OperationUser.php");
+require_once("../../Class/OperationAccount.php");
 
 session_start();
 
+if(isset($_GET['idAccount'])) {
 
-if (!isset($_SESSION['Email'])) {
-
-    //Si l'utilisateur essaye d'accéder à sa page sans se connecter, on le redirige vers le login
-    header("Location: ../Login_SignUp/Login.php");
-
-} else {
-
-    //Connexion à la BDD
-    $dbConnect = new DBConnect();
-    $dbConnect = $dbConnect->getDBConnection();
-
-    $operationUser = new OperationUser($dbConnect);
-
-    //Récupération des infos de l'utilisateur grâce à son adresse mail
-    $data = $operationUser->getUserInfo($_SESSION['Email']);
-
-    //Construction d'un objet utilisateur
-    $user = new User($data['Email'], $data['Name'], $data['FirstName'], $data['Pwd'], $data['UserRight']);
-
-    //Variables de sessions
-    $_SESSION["Name"] = $user->getName();
-    $_SESSION["FirstName"] = $user->getFirstName();
-    $_SESSION["Email"] = $user->getMail();
-    $_SESSION["Pwd"] = $user->getPwd();
-    $_SESSION["UserRight"] = $user->getUserRight();
+    $_SESSION['idAccount'] = $_GET['idAccount'];
 }
+
+
+//Connexion à la BDD
+$dbConnect = new DBConnect();
+$dbConnect = $dbConnect->getDBConnection();
+
+$operationUser = new OperationUser($dbConnect);
+$operationAccount = new OperationAccount($dbConnect);
+
+//Récupération des infos de l'utilisateur grâce à son EMail
+$dataUser = $operationUser->getUserInfo($_SESSION['Email']);
+
+//Pareil pour le compte
+$dataAccount = $operationAccount->getAccountInfo($_SESSION['idAccount']);
+
+
+//Construction d'un objet utilisateur
+$user = new User($dataUser['Email'], $dataUser['Name'], $dataUser['FirstName'], $dataUser['Pwd'], $dataUser['UserRight']);
+
+//Variables de sessions
+$_SESSION["Name"] = $user->getName();
+$_SESSION["FirstName"] = $user->getFirstName();
+$_SESSION["Email"] = $user->getMail();
+$_SESSION["Pwd"] = $user->getPwd();
+$_SESSION["UserRight"] = $user->getUserRight();
+
+//Construction d'un objet compte
+$account = new Account($_SESSION['Email'], $dataAccount['AccountName'], $dataAccount['Type'], $dataAccount['Motto'], $dataAccount['Balance']);
+
+//Variables de sessions
+$_SESSION['AccountName'] = $account->getAccountName();
+$_SESSION['Type'] = $account->getType();
+$_SESSION['Motto'] = $account->getMotto();
+$_SESSION['Balance'] = $account->getBalance();
+
 
 ?>
 
@@ -62,7 +76,7 @@ if (!isset($_SESSION['Email'])) {
         <h2><a href="../UserPages/UserModification.php">Account modification</a></h2>
     </div>
     <div id="title">
-        <h1><?php echo 'TEST' ?></h1>
+        <h1><?php echo $account->getAccountName() ?></h1>
     </div>
 
 </header>

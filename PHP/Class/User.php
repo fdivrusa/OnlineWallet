@@ -121,6 +121,4 @@ class User
     {
         $this->pwd = $pwd;
     }
-
-
 }

@@ -58,13 +58,6 @@ class Account
         return $this->type;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUserMail()
-    {
-        return $this->userMail;
-    }
 
     //------------------//
 

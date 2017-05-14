@@ -31,6 +31,7 @@ class OperationAccount
      */
     public function addAccount($userMail, $accountName, $type, $motto, $balance)
     {
+
         try {
             //Préparation de la requête d'insertion
             $req = $this->dbConnect->prepare("INSERT INTO accounts (UserMail, AccountName, Type, Motto, Balance) 
@@ -57,6 +58,45 @@ class OperationAccount
 
         //Redirection de l'utilisateur sur sa page
         $this->redirect("../UserPages/Home.php");
+    }
+
+    public function deleteAccount($idAccount)
+    {
+
+        $req = $this->dbConnect->prepare("DELETE FROM accounts WHERE idAccount = :idAccount");
+        $req->bindParam(":idAccount", $idAccount);
+        $req->execute();
+
+        $this->redirect("../UserPages/Home.php");
+    }
+
+    public function getAccountInfo($idAccount)
+    {
+
+        //Connexion à la BDD
+        $dbConnect = new DBConnect();
+        $dbConnect = $dbConnect->getDBConnection();
+
+        $req = $dbConnect->prepare("SELECT * FROM accounts WHERE idAccount = :idAccount");
+        $req->bindParam(":idAccount", $idAccount);
+        $req->execute();
+        $data = $req->fetch();
+
+        return $data;
+
+    }
+
+
+    //Modifie les valeurs de l'utilisateurs dans la BDD
+    public function modifyAccount($idAccount, $newAccountName, $newType, $newMotto, $newBalance)
+    {
+        $req = $this->dbConnect->prepare("UPDATE accounts SET AccountName = :newAccountName, Type = :newType, Motto = :newMotto, Balance = :newBalance WHERE  idAccount = :idAccount");
+        $req->bindParam(":newAccountName", $newAccountName);
+        $req->bindParam(":newType", $newType);
+        $req->bindParam(":newMotto", $newMotto);
+        $req->bindParam(":newBalance", $newBalance);
+        $req->bindParam(":idAccount", $idAccount);
+        $req->execute();
     }
 
     /**

@@ -109,6 +109,15 @@ class OperationUser
         $req->execute();
     }
 
+    public function deleteUser($email) {
+
+        $req = $this->dbConnect->prepare("DELETE FROM users WHERE Email = :email");
+        $req->bindParam(":email", $email);
+        $req->execute();
+
+        //je redirige toujours vers le login, de toute façon, si l'admin supprime des utilisateurs, il sera redirigé sur son home
+        $this->redirect("../Display/Login_SignUp/Login.php");
+    }
     //----Vérifications des paramètres----//
 
     /**

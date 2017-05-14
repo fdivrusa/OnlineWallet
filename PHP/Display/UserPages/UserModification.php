@@ -10,6 +10,7 @@ include_once("Header.php");
 require_once("../../Class/DBConnect.php");
 
 $dbConnect = new DBConnect();
+$dbConnect = $dbConnect->getDBConnection();
 $userToModify = new User($_SESSION['Email'], $_SESSION['Name'], $_SESSION['FirstName'], $_SESSION['Pwd'], $_SESSION['UserRight']);
 $operationMod = new OperationUser($dbConnect);
 
@@ -84,7 +85,7 @@ if ($_SESSION['UserRight'] >= 1) {
     </form>
 
     <div id="delButton">
-        <h2><a href="">Delete Account</a></h2>
+        <h2><a href="../Delete.php?=<?php echo $_SESSION['Email'];?>" >Delete Account</a></h2>
     </div>
 
     </body>

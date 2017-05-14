@@ -9,8 +9,6 @@
 include_once("Header.php");
 require_once ("../../Class/User.php");
 
-
-
 //Si l'admin est connecté, on liste tout les utilisateurs
 if ($_SESSION['UserRight'] == 2) {
 
@@ -45,6 +43,7 @@ if ($_SESSION['UserRight'] == 2) {
 
         while ($data = $req->fetch()) {
 
+
             ?>
             <section id="users">
 
@@ -55,7 +54,7 @@ if ($_SESSION['UserRight'] == 2) {
                         <div id="info">
 
                             <!--J'utiliserais le champ Hidden pour savoir chez quel utilisateur je dois modifier les infos-->
-                            <input type="hidden" name="hiddenEmail" value="<?php echo $data['Email'] ?>" >
+                            <input id="hiddenEmail" type="hidden" name="hiddenEmail" value="<?php echo $data['Email'] ?>" >
 
                             <input pattern="[\w\-\+]+(\.[\w\-]+)*@[\w\-]+(\.[\w\-]+)*\.[\w\-]{2,4}" title="Please enter a valid Email" placeholder="Email" name="Email" type="text" value="<?php echo $data['Email'] ?>">
                             <input pattern="[A-Za-z -]{2,}" title="Only valid name" placeholder="Name" name="Name" type="text" value="<?php echo $data['Name'] ?>">
@@ -64,15 +63,15 @@ if ($_SESSION['UserRight'] == 2) {
 
                         </div>
 
-                        <input id="buttonModif" class="button" type="submit" value="Modify user">
-
-                        <button class="button">Delete User</button>
-
+                        <input type="submit" id="modifyAdmin" value="Modify user">
                     </form>
 
+                    <a id="deleteAccount" class="link" href="../Delete.php?Email=<?php echo ($data['Email']);?>">Delete User</a>
                 </div>
 
             </section>
+
+
 
             <?php
 
@@ -98,6 +97,7 @@ if ($_SESSION['UserRight'] == 2) {
 
                     <div id="info">
 
+                        <input type="hidden" value="<?php echo $dataAccount['idAccount']?>">
                         <h2><?php echo $dataAccount['AccountName']?></h2>
                         <h4>Type : <?php echo $dataAccount['Type']?></h4>
                         <h4>Motto : <?php echo $dataAccount['Motto']?></h4>
@@ -106,8 +106,12 @@ if ($_SESSION['UserRight'] == 2) {
                     </div>
 
                     <a id="viewAccount" class="link" href="">Account View</a>
-                    <a id="deleteAccount" class="link" href="">Delete Account</a>
 
+                    <a id="deleteAccount" class="link" href="../AccountViews/Delete.php?idAccount=<?php echo $dataAccount['idAccount']?>">Delete Account</a><br>
+
+                    <div id="modifyAccount" >
+                        <a href="../AccountViews/AccountModification.php?idAccount=<?php echo $dataAccount['idAccount']?>">Modify Account</a>
+                    </div>
                 </form>
 
             </div>

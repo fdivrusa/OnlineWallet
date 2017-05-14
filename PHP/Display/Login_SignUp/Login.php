@@ -78,7 +78,7 @@ if (!$_SESSION['UserRight'] >= 1) {
                 <input class="field" type="password" name="Pwd" placeholder="Password"><br>
                 <input id="bouton" type="submit" value="Login" title="Login">
 
-                <a id="passwordRecover" href="">Forgot password ?</a>
+                <a id="passwordRecover" href="Recovery.php">Forgot password ?</a>
 
                 <div id="accountCreation">
                     <p><a href="Inscription.php"> Create an account </a></p>
