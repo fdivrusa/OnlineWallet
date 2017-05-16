@@ -6,8 +6,8 @@
  * Time: 10:31
  */
 
-include_once ("Header.php");
-require_once ("../../Class/DBConnect.php");
+include_once("Header.php");
+require_once("../../Class/DBConnect.php");
 
 $dbConnect = new DBConnect();
 $dbConnect = $dbConnect->getDBConnection();
@@ -17,8 +17,7 @@ $accountToModify = new Account($_SESSION['Email'], $_SESSION['AccountName'], $_S
 
 if ($_SESSION['UserRight'] >= 1) {
 
-    if(isset($_POST['AccountName']) && isset($_POST['Type']) && isset($_POST['Motto']) && isset($_POST['Balance'])
-        && !empty($_POST['AccountName']) && !empty($_POST['Type']) && !empty($_POST['Motto']) && !empty($_POST['Balance'])) {
+    if (isset($_POST['AccountName']) && isset($_POST['Type']) && isset($_POST['Motto']) && isset($_POST['Balance']) && !empty($_POST['AccountName']) && !empty($_POST['Type']) && !empty($_POST['Motto']) && !empty($_POST['Balance'])) {
 
         echo 'okkkkkkkkkk';
         $operationAcountModif->modifyAccount($_SESSION['idAccount'], $_POST['AccountName'], $_POST['Type'], $_POST['Motto'], $_POST['Balance']);
@@ -38,9 +37,9 @@ if ($_SESSION['UserRight'] >= 1) {
 
         <div id="addAccount">
             <h3 id="formTitle">Modify Account</h3>
-
-            <input pattern="[A-Za-z0-9 -]{2,}" title="Only letters or numbers" class="field" type="text"
-                   name="AccountName" placeholder="Account Name" value="<?php echo $accountToModify->getAccountName(); ?>"><br>
+            <input pattern="[A-Za-z0-9 -]{2,40}" title="Only letters or numbers. Make sure that name is not too long (50 characters max)" class="field" type="text"
+                   name="AccountName" placeholder="Account Name"
+                   value="<?php echo $accountToModify->getAccountName(); ?>"><br>
 
             <select class="field" name="Type">
                 <option value="">Choose here</option>
@@ -60,7 +59,8 @@ if ($_SESSION['UserRight'] >= 1) {
                 <option value="Rouble руб">Rouble руб</option>
             </select>
 
-            <input class="field" type="number" min="0" name="Balance" placeholder="Balance" value="<?php echo $accountToModify->getBalance();?>"><br>
+            <input class="field" type="number" min="0" name="Balance" placeholder="Balance"
+                   value="<?php echo $accountToModify->getBalance(); ?>"><br>
 
             <input id="button" type="submit" value="Modify account">
 
@@ -68,7 +68,7 @@ if ($_SESSION['UserRight'] >= 1) {
 
     </form>
 
-<?php
+    <?php
 
 } else {
 

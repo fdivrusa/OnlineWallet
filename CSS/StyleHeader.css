@@ -33,3 +33,21 @@ h2 {
 h1 {
     color: #15a0ff;
 }
+
+footer {
+
+    width: 100%;
+    bottom: 0;
+    padding: 1% 0 1% 0;
+    position: fixed;
+    color: black;
+    background-color: white;
+    text-align: center;
+}
+
+#txtFooter {
+
+    padding: 0;
+    margin-bottom: 0;
+    font-size: 1em;
+}

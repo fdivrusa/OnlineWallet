@@ -59,9 +59,11 @@ if ($_SESSION['UserRight'] == 2) {
                             <input pattern="[\w\-\+]+(\.[\w\-]+)*@[\w\-]+(\.[\w\-]+)*\.[\w\-]{2,4}" title="Please enter a valid Email" placeholder="Email" name="Email" type="text" value="<?php echo $data['Email'] ?>">
                             <input pattern="[A-Za-z -]{2,}" title="Only valid name" placeholder="Name" name="Name" type="text" value="<?php echo $data['Name'] ?>">
                             <input pattern="[A-Za-z -]{2,}" title="Only valid firstname" placeholder="FirstName" name="FirstName" type="text" value="<?php echo $data['FirstName'] ?>">
-                            <input placeholder="UserRight" name="UserRight" type="text" value="<?php echo $data['UserRight'] ?>">
+                            <input pattern="[1-3]{1}" title="UserRight can only be between 1 and 3" placeholder="UserRight" name="UserRight" type="text" value="<?php echo $data['UserRight'] ?>">
 
                         </div>
+
+                        <a id= "resetPassword" class="link" href="../Admin/PasswordReset.php">Reset user password</a>
 
                         <input type="submit" id="modifyAdmin" value="Modify user">
                     </form>
@@ -70,9 +72,7 @@ if ($_SESSION['UserRight'] == 2) {
                 </div>
 
             </section>
-
-
-
+            
             <?php
 
         }
@@ -93,8 +93,6 @@ if ($_SESSION['UserRight'] == 2) {
 
             <div id="display">
 
-                <form class="form" action="Home.php" method="POST">
-
                     <div id="info">
 
                         <input type="hidden" value="<?php echo $dataAccount['idAccount']?>">
@@ -105,15 +103,13 @@ if ($_SESSION['UserRight'] == 2) {
 
                     </div>
 
-                    <a id="viewAccount" class="link" href="">Account View</a>
+                    <a id="viewAccount" class="link" href="../TransactionViews/TransactionsView.php?idAccount=<?php echo $dataAccount['idAccount']?>">Account View</a>
 
                     <a id="deleteAccount" class="link" href="../AccountViews/Delete.php?idAccount=<?php echo $dataAccount['idAccount']?>">Delete Account</a><br>
 
                     <div id="modifyAccount" >
                         <a href="../AccountViews/AccountModification.php?idAccount=<?php echo $dataAccount['idAccount']?>">Modify Account</a>
                     </div>
-                </form>
-
             </div>
 
         </section>
@@ -130,7 +126,12 @@ if ($_SESSION['UserRight'] == 2) {
 
 <?php
 
-} else {
+} else if($_SESSION['UserRight'] == 3) {
+
+    $_SESSION['Ban'] = 'You are ban. Contact admin for more informations.';
+    header("Location: ../Login_SignUp/Login.php");
+}
+else {
 
     header("Location: ../Login_SignUp/Login.php");
 }

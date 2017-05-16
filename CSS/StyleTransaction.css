@@ -1,0 +1,21 @@
+#deleteTransaction {
+
+    background-color: red;
+    margin: 0 auto;
+
+}
+
+#modifyTransaction {
+
+    margin-top: 10%;
+    text-align: center;
+
+}
+
+#modifyTransaction a {
+
+    text-decoration: none;
+    background-color: #046fc8;
+    color: black;
+    padding: 2%;
+}

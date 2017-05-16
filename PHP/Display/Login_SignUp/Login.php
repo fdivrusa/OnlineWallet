@@ -11,7 +11,7 @@ require_once("../../Class/DBConnect.php");
 require_once("../../Class/OperationUser.php");
 
 //Si l'utilisateur est déja logué, on le redirige vers sa page
-if (!$_SESSION['UserRight'] >= 1) {
+if (!$_SESSION['UserRight'] >= 1 || $_SESSION['UserRight'] == 3) {
 
     if (isset($_POST['Email']) && isset($_POST['Pwd']) && !empty($_POST['Email']) && !empty($_POST['Pwd'])) {
 
@@ -73,7 +73,12 @@ if (!$_SESSION['UserRight'] >= 1) {
                         $error = $_SESSION['Error'];
                         echo $error;
                         unset($_SESSION['Error']);
-                    }; ?></h5>
+                    } else if (isset($_SESSION['Ban'])) {
+                        $ban = $_SESSION['Ban'];
+                        echo $ban;
+                        unset($_SESSION['Ban']);
+                    }
+                    ?></h5>
                 <input class="field" type="text" name="Email" placeholder="Email"><br>
                 <input class="field" type="password" name="Pwd" placeholder="Password"><br>
                 <input id="bouton" type="submit" value="Login" title="Login">
@@ -86,11 +91,17 @@ if (!$_SESSION['UserRight'] >= 1) {
             </div>
         </form>
 
+        <footer>
+            <a href="mailto:floriandv1996@gmail.com">Contact Admin</a>
+            <p id="txtFooter">Website developped as part of the PHP course</p>
+        </footer>
+
         </body>
         </html>
 
         <?php
     }
+
 } else {
 
     header("Location: ../UserPages/Home.php");

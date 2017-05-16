@@ -25,7 +25,7 @@ header {
 .form {
 
     padding-bottom: 5%;
-    box-shadow: 15px 15px 20px black;
+
 }
 
 #userInfo {
@@ -81,6 +81,8 @@ p {
     background-color: ghostwhite;
     text-align: center;
     width: 100%;
+    padding-bottom: 5%;
+    box-shadow: 15px 15px 20px black;
 }
 
 #info {
@@ -148,6 +150,8 @@ input {
     width: 30%;
     text-align: center;
     background-color: #046fc8;
+    box-shadow: 5px 5px 10px black;
+
 }
 
 #modifyAccount {
@@ -164,3 +168,9 @@ input {
     padding: 2%;
 
 }
+
+#resetPassword {
+
+    background-color: #046fc8;
+}
+

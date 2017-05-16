@@ -108,6 +108,12 @@ if (!$_SESSION['UserRight'] >= 1) {
 
         </form>
 
+        <footer>
+            <a href="mailto:floriandv1996@gmail.com">Contact Admin</a>
+            <p id="txtFooter">Website developped as part of the PHP course</p>
+        </footer>
+
+
         </body>
         </html>
 

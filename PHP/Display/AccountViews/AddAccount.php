@@ -38,7 +38,7 @@ if ($_SESSION['UserRight'] >= 1) {
 
                 <h3 id="formTitle">Add Account</h3>
 
-                <input pattern="[A-Za-z0-9 -]{2,}" title="Only letters or numbers" class="field" type="text"
+                <input pattern="[A-Za-z0-9 -]{2,40}" title="Only letters or numbers. Make sure that name is not too long (40 characters max" class="field" type="text"
                        name="AccountName" placeholder="Account Name"><br>
 
                 <select class="field" name="Type">
