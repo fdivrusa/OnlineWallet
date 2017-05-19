@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by IntelliJ IDEA.
- * User: flori
+ * User: florian
  * Date: 16-05-17
  * Time: 09:25
  */
@@ -19,6 +19,7 @@ if ($_SESSION['UserRight'] >= 1) {
     $req->bindParam(":idAccount", $_SESSION['idAccount']);
     $req->execute();
 
+    //Je les affiche
     while ($dataTransactions = $req->fetch()) {
 
         ?>
@@ -33,7 +34,6 @@ if ($_SESSION['UserRight'] >= 1) {
 
                 <div id="info">
 
-                    <input type="hidden" value="<?php echo $dataTransactions['idTransaction'] ?>">
                     <h2><?php echo $dataTransactions['Title'] ?></h2>
                     <h4>Category : <?php echo $dataTransactions['Category'] ?></h4>
                     <h4>Value : <?php echo $dataTransactions['Value'] ?></h4>
@@ -42,11 +42,10 @@ if ($_SESSION['UserRight'] >= 1) {
                 </div>
 
                 <a id="deleteTransaction" class="link"
-                   href="">Delete transaction</a><br>
+                   href="Delete.php?idTransaction=<?php echo $dataTransactions['idTransaction']?>&Value=<?php echo $dataTransactions['Value']?>">Delete transaction</a><br>
 
                 <div id="modifyTransaction">
-                    <a href="">Modify
-                        transaction</a>
+                    <a href="ModifyTransaction.php?idTransaction=<?php echo $dataTransactions['idTransaction']?>">Modify transaction</a>
                 </div>
             </div>
 
@@ -59,7 +58,7 @@ if ($_SESSION['UserRight'] >= 1) {
     ?>
 
     <div id="addButton">
-        <a id="addAccount" href="../AccountViews/AddAccount.php">Add a Transaction</a>
+        <a id="addAccount" href="../TransactionViews/AddTransactions.php">Add a Transaction</a>
     </div>
 
     <?php

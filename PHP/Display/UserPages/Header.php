@@ -42,6 +42,9 @@ if (!isset($_SESSION['Email'])) {
 
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <link rel="stylesheet" href="../../../CSS/StyleHome.css">
 </head>
@@ -68,3 +71,5 @@ if (!isset($_SESSION['Email'])) {
 </header>
 
 </body>
+
+</html>

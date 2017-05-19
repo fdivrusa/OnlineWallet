@@ -87,7 +87,7 @@ class OperationAccount
     }
 
 
-    //Modifie les valeurs de l'utilisateurs dans la BDD
+    //Modifie les valeurs du compte dans la BDD
     public function modifyAccount($idAccount, $newAccountName, $newType, $newMotto, $newBalance)
     {
         $req = $this->dbConnect->prepare("UPDATE accounts SET AccountName = :newAccountName, Type = :newType, Motto = :newMotto, Balance = :newBalance WHERE  idAccount = :idAccount");

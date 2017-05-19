@@ -1,0 +1,45 @@
+#addTransaction {
+
+    background-color: white;
+    width: 20%;
+    margin: 0 auto;
+    margin-top: 5%;
+    padding: 0 5% 5%;
+
+}
+
+#modTransaction {
+
+    background-color: white;
+    width: 20%;
+    margin: 0 auto;
+    margin-top: 5%;
+    padding: 0 5% 5%;
+
+}
+
+#formTitle {
+
+    margin: 0;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    text-align: center;
+    font-size: 2em;
+}
+
+
+.field {
+    border: solid 1px grey;
+    height: 4%;
+    width: 100%;
+    margin-top: 5%;
+}
+
+#button {
+
+    background-color: #046fc8;
+    padding: 4%;
+    display: block;
+    margin: 0 auto;
+    margin-top: 5%;
+}

@@ -8,17 +8,13 @@
 
 require_once("../../Class/User.php");
 require_once("../../Class/Account.php");
+require_once("../../Class/Transaction.php");
 require_once("../../Class/DBConnect.php");
 require_once("../../Class/OperationUser.php");
 require_once("../../Class/OperationAccount.php");
+require_once("../../Class/OperationTransaction.php");
 
 session_start();
-
-if(isset($_GET['idAccount'])) {
-
-    $_SESSION['idAccount'] = $_GET['idAccount'];
-}
-
 
 //Connexion à la BDD
 $dbConnect = new DBConnect();
@@ -26,11 +22,38 @@ $dbConnect = $dbConnect->getDBConnection();
 
 $operationUser = new OperationUser($dbConnect);
 $operationAccount = new OperationAccount($dbConnect);
+$operationTransaction = new OperationTransaction($dbConnect);
+
+if(isset($_GET['idAccount'])) {
+
+   $_SESSION['idAccount'] = $_GET['idAccount'];
+}
+
+//Tant que je ne revoie pas d'id de transaction, je ne fais rien avec les transactions
+if(isset($_GET['idTransaction'])) {
+
+    //Je récupère l'id de ma transaction
+    $_SESSION['idTransaction'] = $_GET['idTransaction'];
+
+    //je récupère les infos de ma transaction
+    $dataTransaction = $operationTransaction->getTransactionInfo($_SESSION['idTransaction']);
+
+    //Création d'un objet transaction
+    $transaction = new Transaction($_SESSION['idAccount'], $dataTransaction['Title'], $dataTransaction['Category'], $dataTransaction['Value'], $dataTransaction['Date']);
+
+    //Variables de sessions
+    $_SESSION['Title'] = $transaction->getTitle();
+    $_SESSION['Category'] = $transaction->getCategory();
+    $_SESSION['Value'] = $transaction->getValue();
+    $_SESSION['Date'] = $transaction->getDate();
+
+}
+
 
 //Récupération des infos de l'utilisateur grâce à son EMail
 $dataUser = $operationUser->getUserInfo($_SESSION['Email']);
 
-//Pareil pour le compte
+//Pareil pour le compte et les transactions
 $dataAccount = $operationAccount->getAccountInfo($_SESSION['idAccount']);
 
 
@@ -53,8 +76,9 @@ $_SESSION['Type'] = $account->getType();
 $_SESSION['Motto'] = $account->getMotto();
 $_SESSION['Balance'] = $account->getBalance();
 
-
 ?>
+
+
 
 <head>
     <link rel="stylesheet" href="../../../CSS/StyleHome.css">

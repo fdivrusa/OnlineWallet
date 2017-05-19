@@ -8,6 +8,7 @@
 
 include_once("Header.php");
 require_once("../../Class/DBConnect.php");
+require_once ("../../Class/Account.php");
 
 $dbConnect = new DBConnect();
 $dbConnect = $dbConnect->getDBConnection();
@@ -19,7 +20,6 @@ if ($_SESSION['UserRight'] >= 1) {
 
     if (isset($_POST['AccountName']) && isset($_POST['Type']) && isset($_POST['Motto']) && isset($_POST['Balance']) && !empty($_POST['AccountName']) && !empty($_POST['Type']) && !empty($_POST['Motto']) && !empty($_POST['Balance'])) {
 
-        echo 'okkkkkkkkkk';
         $operationAcountModif->modifyAccount($_SESSION['idAccount'], $_POST['AccountName'], $_POST['Type'], $_POST['Motto'], $_POST['Balance']);
         $operationAcountModif->redirect("../UserPages/Home.php");
     }
@@ -59,7 +59,7 @@ if ($_SESSION['UserRight'] >= 1) {
                 <option value="Rouble руб">Rouble руб</option>
             </select>
 
-            <input class="field" type="number" min="0" name="Balance" placeholder="Balance"
+            <input class="field" type="number" min="0" step="0.01" name="Balance" placeholder="Balance"
                    value="<?php echo $accountToModify->getBalance(); ?>"><br>
 
             <input id="button" type="submit" value="Modify account">

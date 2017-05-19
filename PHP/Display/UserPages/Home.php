@@ -95,7 +95,6 @@ if ($_SESSION['UserRight'] == 2) {
 
                     <div id="info">
 
-                        <input type="hidden" value="<?php echo $dataAccount['idAccount']?>">
                         <h2><?php echo $dataAccount['AccountName']?></h2>
                         <h4>Type : <?php echo $dataAccount['Type']?></h4>
                         <h4>Motto : <?php echo $dataAccount['Motto']?></h4>
