@@ -109,7 +109,8 @@ class OperationUser
         $req->execute();
     }
 
-    public function deleteUser($email) {
+    public function deleteUser($email)
+    {
 
         $req = $this->dbConnect->prepare("DELETE FROM users WHERE Email = :email");
         $req->bindParam(":email", $email);
@@ -270,6 +271,25 @@ class OperationUser
         $data = $req->fetch();
 
         return $data;
+    }
+
+    public function resetUserPwd($email)
+    {
+        $newPwd = "test";
+        $subject = "Password Recovery Procedure [No Reply]";
+        $text = "Your new password is \"test\".\nDon't forget to change your password when you login again !";
+
+        //Hash du nouveau mot de passe
+        $pwdHash = hash("sha512", $this->salt . $newPwd);
+
+        //Je le remplace dans la BDD
+        $req = $this->dbConnect->prepare("UPDATE users SET Pwd = :newPwd WHERE Email = :email");
+        $req->bindParam(":newPwd", $pwdHash);
+        $req->bindParam(":email", $email);
+        $req->execute();
+
+        $this->redirect("../UserPages/Home.php");
+
     }
 
     /**

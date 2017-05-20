@@ -63,7 +63,7 @@ if ($_SESSION['UserRight'] == 2) {
 
                         </div>
 
-                        <a id= "resetPassword" class="link" href="../Admin/PasswordReset.php">Reset user password</a>
+                        <a id= "resetPassword" class="link" href="../Admin/PasswordReset.php?Email=<?php echo $data['Email']?>">Reset user password</a>
 
                         <input type="submit" id="modifyAdmin" value="Modify user">
                     </form>

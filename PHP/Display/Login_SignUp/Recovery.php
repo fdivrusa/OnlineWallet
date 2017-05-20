@@ -6,4 +6,4 @@
  * Time: 22:17
  */
 
-echo "Due to my exams I don't have time to recover your password, wait the end of my exams ! You can still create a new account if you want to explore my very useful website, or you can join the Admin to ask if he can reset your password";
+echo "On local I can't send you a new password, but contact the admin and he will reset your password. The new password will be \"test\"";
