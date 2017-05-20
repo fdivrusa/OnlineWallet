@@ -85,7 +85,6 @@ class OperationTransaction
         return $data;
     }
 
-
     //Modifie les valeurs de la transaction dans la BDD
     public function modifyTransaction($idTransaction, $newTitle, $newCategory, $newValue, $newDate)
     {
@@ -97,7 +96,6 @@ class OperationTransaction
         $req->bindParam(":idTransaction", $idTransaction);
         $req->execute();
     }
-
 
     /**
      * @param $url
