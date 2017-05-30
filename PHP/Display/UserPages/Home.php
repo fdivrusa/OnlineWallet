@@ -127,6 +127,7 @@ if ($_SESSION['UserRight'] == 2) {
 
 } else if($_SESSION['UserRight'] == 3) {
 
+
     $_SESSION['Ban'] = 'You are ban. Contact admin for more informations.';
     header("Location: ../Login_SignUp/Login.php");
 }

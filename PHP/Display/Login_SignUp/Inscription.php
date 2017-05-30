@@ -5,7 +5,7 @@ require_once("../../Class/DBConnect.php");
 require_once("../../Class/OperationUser.php");
 
 //On regarde si l'utilisateur n'est pas déja logué, sinon on le redirige vers sa page
-if ($_SESSION['UserRight'] >= 1) {
+if (!$_SESSION['UserRight'] >= 1) {
 
     //On vérifie que l'utilisateur a bien remplis tout les champs
     if (!empty($_POST['Email']) && !empty($_POST['UserName']) && !empty($_POST['FirstName']) && !empty($_POST['Pwd']) && !empty($_POST['PwdVerif']) &&

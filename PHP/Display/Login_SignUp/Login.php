@@ -77,6 +77,8 @@ if (!$_SESSION['UserRight'] >= 1 || $_SESSION['UserRight'] == 3) {
                         $ban = $_SESSION['Ban'];
                         echo $ban;
                         unset($_SESSION['Ban']);
+                        session_unset();
+                        session_destroy();
                     }
                     ?></h5>
                 <input class="field" type="text" name="Email" placeholder="Email"><br>
